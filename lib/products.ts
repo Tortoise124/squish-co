@@ -20,6 +20,7 @@ export type Product = {
   tagline: string
   description: string
   image: string
+  gallery: { src: string; alt: string }[]
   swatch: 'pearl-green' | 'pearl-gold' | 'pearl-cream'
   badge?: string
 }
@@ -31,6 +32,11 @@ export const products: Product[] = [
     tagline: 'Calm as a rockpool',
     description: 'A soft sage squish with a gentle pearly shimmer, inspired by sea grass swaying in the shallows.',
     image: '/images/seafoam.png',
+    gallery: [
+      { src: '/images/seafoam.png', alt: 'Seafoam Green squishy' },
+      { src: '/images/seafoam-enjoy.png', alt: 'A child on the beach happily squishing a Seafoam Green squishy' },
+      { src: '/images/seafoam-hand.png', alt: 'A Seafoam Green squishy resting in a child’s open palm' },
+    ],
     swatch: 'pearl-green',
     badge: 'Most loved',
   },
@@ -40,6 +46,11 @@ export const products: Product[] = [
     tagline: 'Warm like the afternoon sun',
     description: 'A glowing golden squish that feels like scooping up a handful of warm beach sand.',
     image: '/images/golden-sand.png',
+    gallery: [
+      { src: '/images/golden-sand.png', alt: 'Golden Sand squishy' },
+      { src: '/images/golden-sand-enjoy.png', alt: 'A child laughing on a picnic blanket while squishing a Golden Sand squishy' },
+      { src: '/images/golden-sand-hand.png', alt: 'A Golden Sand squishy held gently in a child’s hand' },
+    ],
     swatch: 'pearl-gold',
   },
   {
@@ -48,6 +59,11 @@ export const products: Product[] = [
     tagline: 'Soft as a seashell',
     description: 'Creamy white with an iridescent sheen, just like the inside of a shell. Our gentlest squish.',
     image: '/images/pearl.png',
+    gallery: [
+      { src: '/images/pearl.png', alt: 'Pearl Cream squishy' },
+      { src: '/images/pearl-enjoy.png', alt: 'A calm child by a sunny window squeezing a Pearl Cream squishy' },
+      { src: '/images/pearl-hand.png', alt: 'A Pearl Cream squishy cupped in a child’s hands' },
+    ],
     swatch: 'pearl-cream',
   },
 ]

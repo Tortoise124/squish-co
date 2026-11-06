@@ -1,46 +1,20 @@
 'use client'
 
-import Image from 'next/image'
 import { useState } from 'react'
 import { Plus } from 'lucide-react'
 import { useCart } from '@/components/cart-provider'
+import { ProductGallery } from '@/components/home/product-gallery'
 import { formatPrice, getSize, sizes, type Product, type SizeId } from '@/lib/products'
 import { cn } from '@/lib/utils'
 
 export function ProductCard({ product }: { product: Product }) {
   const { add } = useCart()
-  const [squishing, setSquishing] = useState(false)
   const [sizeId, setSizeId] = useState<SizeId>('medium')
   const size = getSize(sizeId)
 
   return (
     <article className="group flex flex-col overflow-hidden rounded-3xl border border-border bg-card shadow-sm transition-shadow hover:shadow-lg">
-      <button
-        type="button"
-        onClick={() => setSquishing(true)}
-        onAnimationEnd={() => setSquishing(false)}
-        aria-label={`Give ${product.name} a squish`}
-        className="relative block overflow-hidden bg-muted"
-      >
-        <Image
-          src={product.image || '/placeholder.svg'}
-          alt={`${product.name} squishy`}
-          width={600}
-          height={600}
-          className={cn(
-            'aspect-square w-full object-cover transition-transform group-hover:scale-105',
-            squishing && 'animate-squish',
-          )}
-        />
-        {product.badge && (
-          <span className="absolute left-4 top-4 rounded-full bg-accent px-3 py-1 text-xs font-bold text-accent-foreground">
-            {product.badge}
-          </span>
-        )}
-        <span className="absolute bottom-3 right-3 rounded-full bg-card/90 px-3 py-1 text-xs font-semibold opacity-0 transition-opacity group-hover:opacity-100">
-          Tap to squish!
-        </span>
-      </button>
+      <ProductGallery product={product} />
       <div className="flex flex-1 flex-col gap-3 p-5">
         <div className="flex items-center gap-2">
           <span className={cn(product.swatch, 'size-4 rounded-full ring-1 ring-border')} aria-hidden="true" />

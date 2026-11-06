@@ -79,8 +79,8 @@ export function CartDrawer() {
                 : 'Yay! You get free carbon-neutral shipping.'}
             </div>
             <ul className="flex-1 divide-y divide-border overflow-y-auto px-6">
-              {lines.map(({ product, quantity }) => (
-                <li key={product.id} className="flex items-center gap-4 py-4">
+              {lines.map(({ key, product, size, quantity }) => (
+                <li key={key} className="flex items-center gap-4 py-4">
                   <Image
                     src={product.image || '/placeholder.svg'}
                     alt=""
@@ -90,13 +90,15 @@ export function CartDrawer() {
                   />
                   <div className="flex-1">
                     <p className="font-bold">{product.name}</p>
-                    <p className="text-sm text-muted-foreground">{formatPrice(product.price)} each</p>
+                    <p className="text-sm text-muted-foreground">
+                      {size.label} · {formatPrice(size.price)} each
+                    </p>
                     <div className="mt-2 flex items-center gap-2">
                       <button
                         type="button"
-                        onClick={() => setQuantity(product.id, quantity - 1)}
+                        onClick={() => setQuantity(key, quantity - 1)}
                         className="rounded-full border border-border p-1 hover:bg-secondary"
-                        aria-label={`Remove one ${product.name}`}
+                        aria-label={`Remove one ${size.label} ${product.name}`}
                       >
                         <Minus className="size-3.5" aria-hidden="true" />
                       </button>
@@ -105,15 +107,15 @@ export function CartDrawer() {
                       </span>
                       <button
                         type="button"
-                        onClick={() => setQuantity(product.id, quantity + 1)}
+                        onClick={() => setQuantity(key, quantity + 1)}
                         className="rounded-full border border-border p-1 hover:bg-secondary"
-                        aria-label={`Add one more ${product.name}`}
+                        aria-label={`Add one more ${size.label} ${product.name}`}
                       >
                         <Plus className="size-3.5" aria-hidden="true" />
                       </button>
                     </div>
                   </div>
-                  <p className="font-bold">{formatPrice(product.price * quantity)}</p>
+                  <p className="font-bold">{formatPrice(size.price * quantity)}</p>
                 </li>
               ))}
             </ul>

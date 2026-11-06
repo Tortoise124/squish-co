@@ -1,11 +1,26 @@
+export type SizeId = 'small' | 'medium'
+
+export type Size = {
+  id: SizeId
+  label: string
+  detail: string
+  price: number
+}
+
+export const sizes: Size[] = [
+  { id: 'small', label: 'Small', detail: 'About 5cm, perfect for little hands and pencil cases', price: 10 },
+  { id: 'medium', label: 'Medium', detail: 'About 7cm, a full palm-sized squeeze', price: 14 },
+]
+
+export const getSize = (id: SizeId) => sizes.find((s) => s.id === id) ?? sizes[0]
+
 export type Product = {
   id: string
   name: string
   tagline: string
   description: string
-  price: number
   image: string
-  swatch: 'pearl-green' | 'pearl-gold' | 'pearl-cream' | 'pearl-swirl'
+  swatch: 'pearl-green' | 'pearl-gold' | 'pearl-cream'
   badge?: string
 }
 
@@ -15,7 +30,6 @@ export const products: Product[] = [
     name: 'Seafoam Green',
     tagline: 'Calm as a rockpool',
     description: 'A soft sage squish with a gentle pearly shimmer, inspired by sea grass swaying in the shallows.',
-    price: 14,
     image: '/images/seafoam.png',
     swatch: 'pearl-green',
     badge: 'Most loved',
@@ -25,7 +39,6 @@ export const products: Product[] = [
     name: 'Golden Sand',
     tagline: 'Warm like the afternoon sun',
     description: 'A glowing golden squish that feels like scooping up a handful of warm beach sand.',
-    price: 14,
     image: '/images/golden-sand.png',
     swatch: 'pearl-gold',
   },
@@ -34,19 +47,8 @@ export const products: Product[] = [
     name: 'Pearl Cream',
     tagline: 'Soft as a seashell',
     description: 'Creamy white with an iridescent sheen, just like the inside of a shell. Our gentlest squish.',
-    price: 14,
     image: '/images/pearl.png',
     swatch: 'pearl-cream',
-  },
-  {
-    id: 'rockpool',
-    name: 'Rockpool Swirl',
-    tagline: 'All three, swirled by hand',
-    description: 'Every swirl is one-of-a-kind, marbled by hand with green, gold and cream. No two are the same!',
-    price: 16,
-    image: '/images/rockpool.png',
-    swatch: 'pearl-swirl',
-    badge: 'Limited batch',
   },
 ]
 

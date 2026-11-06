@@ -13,11 +13,11 @@ export function ShopSection() {
             </h2>
           </div>
           <p className="max-w-md text-pretty text-muted-foreground">
-            Each squish is about the size of a small egg, made to fit perfectly in a child&apos;s palm. Every one is
-            shaped by hand, so yours will be totally unique.
+            Three pearly colours, two palm-friendly sizes. Every squish is shaped by hand from plant-based,
+            compostable ingredients, so yours will be totally unique and gentle on the planet.
           </p>
         </div>
-        <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
+        <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
           {products.map((product) => (
             <ProductCard key={product.id} product={product} />
           ))}

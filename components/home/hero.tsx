@@ -17,14 +17,15 @@ export function Hero() {
           </h1>
           <p className="max-w-lg text-pretty text-lg leading-relaxed text-muted-foreground">
             Palm-sized, pearly-soft squishies made by hand in Australia from non-toxic, fully biodegradable
-            ingredients. Real, tactile play for kids, with no plastic left behind.
+            ingredients. Real, tactile play for kids, and when it&apos;s worn out, it goes in the compost, not the
+            ocean.
           </p>
           <div className="flex flex-wrap gap-3">
             <Link href="#shop" className={buttonVariants({ size: 'lg', className: 'h-12 rounded-full px-7 text-base' })}>
               Shop the squishies
             </Link>
             <Link
-              href="#why"
+              href="#eco"
               className={buttonVariants({
                 size: 'lg',
                 variant: 'outline',
@@ -40,6 +41,9 @@ export function Hero() {
             </li>
             <li className="flex items-center gap-1.5">
               <Leaf className="size-4 text-primary" aria-hidden="true" /> Non-toxic and compostable
+            </li>
+            <li className="flex items-center gap-1.5">
+              <Sprout className="size-4 text-primary" aria-hidden="true" /> 100% plastic-free packaging
             </li>
           </ul>
         </div>

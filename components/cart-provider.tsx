@@ -1,9 +1,9 @@
 'use client'
 
 import { createContext, useContext, useMemo, useState } from 'react'
-import { products, type Product } from '@/lib/products'
+import { products, sizes, type Product, type Size, type SizeId } from '@/lib/products'
 
-type CartLine = { product: Product; quantity: number }
+type CartLine = { key: string; product: Product; size: Size; quantity: number }
 
 type CartContextValue = {
   lines: CartLine[]
@@ -11,8 +11,8 @@ type CartContextValue = {
   subtotal: number
   isOpen: boolean
   setOpen: (open: boolean) => void
-  add: (id: string) => void
-  setQuantity: (id: string, quantity: number) => void
+  add: (id: string, size: SizeId) => void
+  setQuantity: (key: string, quantity: number) => void
   clear: () => void
 }
 
@@ -20,26 +20,32 @@ const CartContext = createContext<CartContextValue | null>(null)
 
 const MAX_PER_ITEM = 10
 
+const lineKey = (id: string, size: SizeId) => `${id}:${size}`
+
 export function CartProvider({ children }: { children: React.ReactNode }) {
   const [quantities, setQuantities] = useState<Record<string, number>>({})
   const [isOpen, setOpen] = useState(false)
 
   const value = useMemo<CartContextValue>(() => {
-    const lines = products
-      .filter((p) => (quantities[p.id] ?? 0) > 0)
-      .map((product) => ({ product, quantity: quantities[product.id] }))
+    const lines = products.flatMap((product) =>
+      sizes
+        .map((size) => ({ key: lineKey(product.id, size.id), product, size }))
+        .filter(({ key }) => (quantities[key] ?? 0) > 0)
+        .map((line) => ({ ...line, quantity: quantities[line.key] })),
+    )
     return {
       lines,
       count: lines.reduce((sum, l) => sum + l.quantity, 0),
-      subtotal: lines.reduce((sum, l) => sum + l.quantity * l.product.price, 0),
+      subtotal: lines.reduce((sum, l) => sum + l.quantity * l.size.price, 0),
       isOpen,
       setOpen,
-      add: (id) => {
-        setQuantities((q) => ({ ...q, [id]: Math.min((q[id] ?? 0) + 1, MAX_PER_ITEM) }))
+      add: (id, size) => {
+        const key = lineKey(id, size)
+        setQuantities((q) => ({ ...q, [key]: Math.min((q[key] ?? 0) + 1, MAX_PER_ITEM) }))
         setOpen(true)
       },
-      setQuantity: (id, quantity) =>
-        setQuantities((q) => ({ ...q, [id]: Math.max(0, Math.min(quantity, MAX_PER_ITEM)) })),
+      setQuantity: (key, quantity) =>
+        setQuantities((q) => ({ ...q, [key]: Math.max(0, Math.min(quantity, MAX_PER_ITEM)) })),
       clear: () => setQuantities({}),
     }
   }, [quantities, isOpen])

@@ -21,6 +21,8 @@ export function SiteFooter() {
             <li><Link href="/#why" className="hover:text-background">Why biodegradable</Link></li>
             <li><Link href="/#impact" className="hover:text-background">Our impact</Link></li>
             <li><Link href="/blog" className="hover:text-background">Blog</Link></li>
+            <li><Link href="/reviews" className="hover:text-background">Reviews</Link></li>
+            <li><Link href="/about" className="hover:text-background">About us</Link></li>
           </ul>
         </div>
         <div>

@@ -11,6 +11,8 @@ const nav = [
   { href: '/#why', label: 'Why Squish' },
   { href: '/#impact', label: 'Our Impact' },
   { href: '/blog', label: 'Blog' },
+  { href: '/reviews', label: 'Reviews' },
+  { href: '/about', label: 'About Us' },
 ]
 
 export function SiteHeader() {
